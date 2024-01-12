@@ -3,11 +3,11 @@ module;
 #include <iterator>
 #include <iostream>
 #include "Deque.h"
-export module DequeBasedOnBidirectionalCyclicLinkedList;
+export module DequeBasedOnUnidirectionalCyclicLinkedList;
 
 export namespace DequeNamespace {
 	template <typename T>
-	class DequeBasedOnBidirectionalCyclicLinkedList : virtual Deque<T>
+	class DequeBasedOnUnidirectionalCyclicLinkedList : virtual Deque<T>
 	{
 		using Iterator = T*;
 
@@ -69,12 +69,12 @@ export namespace DequeNamespace {
 		unsigned size;
 
 	public:
-		DequeBasedOnBidirectionalCyclicLinkedList();
-		explicit DequeBasedOnBidirectionalCyclicLinkedList(unsigned);
-		DequeBasedOnBidirectionalCyclicLinkedList(const DequeBasedOnBidirectionalCyclicLinkedList&);
-		DequeBasedOnBidirectionalCyclicLinkedList(DequeBasedOnBidirectionalCyclicLinkedList&&);
-		DequeBasedOnBidirectionalCyclicLinkedList(std::initializer_list<T>);
-		~DequeBasedOnBidirectionalCyclicLinkedList();
+		DequeBasedOnUnidirectionalCyclicLinkedList();
+		explicit DequeBasedOnUnidirectionalCyclicLinkedList(unsigned);
+		DequeBasedOnUnidirectionalCyclicLinkedList(const DequeBasedOnUnidirectionalCyclicLinkedList&);
+		DequeBasedOnUnidirectionalCyclicLinkedList(DequeBasedOnUnidirectionalCyclicLinkedList&&);
+		DequeBasedOnUnidirectionalCyclicLinkedList(std::initializer_list<T>);
+		~DequeBasedOnUnidirectionalCyclicLinkedList();
 		unsigned GetSize();
 
 		Iterator begin();
@@ -83,9 +83,9 @@ export namespace DequeNamespace {
 		Iterator end() const;
 		const T& operator[](int) const;
 		T& operator[](int);
-		DequeBasedOnBidirectionalCyclicLinkedList<T>& operator=(const DequeBasedOnBidirectionalCyclicLinkedList&);
-		DequeBasedOnBidirectionalCyclicLinkedList<T>& operator=(DequeBasedOnBidirectionalCyclicLinkedList&&);
-		DequeBasedOnBidirectionalCyclicLinkedList<T>& operator=(std::initializer_list<T>);
+		DequeBasedOnUnidirectionalCyclicLinkedList<T>& operator=(const DequeBasedOnUnidirectionalCyclicLinkedList&);
+		DequeBasedOnUnidirectionalCyclicLinkedList<T>& operator=(DequeBasedOnUnidirectionalCyclicLinkedList&&);
+		DequeBasedOnUnidirectionalCyclicLinkedList<T>& operator=(std::initializer_list<T>);
 		void PushFront(const T& element);
 		void PushBack(const T& element);
 		T PopFront();
@@ -103,11 +103,11 @@ export namespace DequeNamespace {
 
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>::DequeBasedOnBidirectionalCyclicLinkedList()
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>::DequeBasedOnUnidirectionalCyclicLinkedList()
 		: size(0), list(nullptr){}
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>::DequeBasedOnBidirectionalCyclicLinkedList(unsigned size)
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>::DequeBasedOnUnidirectionalCyclicLinkedList(unsigned size)
 	{
 		if (size <= 0)
 			throw 0;
@@ -117,7 +117,7 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>::DequeBasedOnBidirectionalCyclicLinkedList(const DequeBasedOnBidirectionalCyclicLinkedList& obj)
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>::DequeBasedOnUnidirectionalCyclicLinkedList(const DequeBasedOnUnidirectionalCyclicLinkedList& obj)
 	{
 		list = new CyclicLinkedList(obj.list->Value());
 		CyclicLinkedList* iterator = obj.list->Next();
@@ -129,7 +129,7 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>::DequeBasedOnBidirectionalCyclicLinkedList(DequeBasedOnBidirectionalCyclicLinkedList&& obj)
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>::DequeBasedOnUnidirectionalCyclicLinkedList(DequeBasedOnUnidirectionalCyclicLinkedList&& obj)
 	{
 		list = obj.list;
 		size = obj.size;
@@ -137,7 +137,7 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>::DequeBasedOnBidirectionalCyclicLinkedList(std::initializer_list<T> ilist)
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>::DequeBasedOnUnidirectionalCyclicLinkedList(std::initializer_list<T> ilist)
 	{
 		for (const auto& element : ilist)
 		{
@@ -146,44 +146,44 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>::~DequeBasedOnBidirectionalCyclicLinkedList()
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>::~DequeBasedOnUnidirectionalCyclicLinkedList()
 	{
 		for (auto i = 0; i < size; i++)
 			PopBack();
 	}
 
 	template<typename T>
-	unsigned DequeBasedOnBidirectionalCyclicLinkedList<T>::GetSize()
+	unsigned DequeBasedOnUnidirectionalCyclicLinkedList<T>::GetSize()
 	{
 		return size;
 	}
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>::Iterator DequeBasedOnBidirectionalCyclicLinkedList<T>::begin()
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>::Iterator DequeBasedOnUnidirectionalCyclicLinkedList<T>::begin()
 	{
 		return Iterator(list);
 	}
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>::Iterator DequeBasedOnBidirectionalCyclicLinkedList<T>::begin() const
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>::Iterator DequeBasedOnUnidirectionalCyclicLinkedList<T>::begin() const
 	{
 		return Iterator(list);
 	}
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>::Iterator DequeBasedOnBidirectionalCyclicLinkedList<T>::end()
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>::Iterator DequeBasedOnUnidirectionalCyclicLinkedList<T>::end()
 	{
 		return Iterator(list->Last());
 	}
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>::Iterator DequeBasedOnBidirectionalCyclicLinkedList<T>::end() const
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>::Iterator DequeBasedOnUnidirectionalCyclicLinkedList<T>::end() const
 	{
 		return Iterator(list->Last());
 	}
 
 	template<typename T>
-	const T& DequeBasedOnBidirectionalCyclicLinkedList<T>::operator[](int index) const
+	const T& DequeBasedOnUnidirectionalCyclicLinkedList<T>::operator[](int index) const
 	{
 		CyclicLinkedList* iterator = this;
 		for (auto i = 0; i < index; i++)
@@ -192,7 +192,7 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	T& DequeBasedOnBidirectionalCyclicLinkedList<T>::operator[](int index)
+	T& DequeBasedOnUnidirectionalCyclicLinkedList<T>::operator[](int index)
 	{
 		CyclicLinkedList* iterator = this->list;
 		for (auto i = 0; i < index; i++)
@@ -201,13 +201,13 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>& DequeBasedOnBidirectionalCyclicLinkedList<T>::operator=(const DequeBasedOnBidirectionalCyclicLinkedList& obj)
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>& DequeBasedOnUnidirectionalCyclicLinkedList<T>::operator=(const DequeBasedOnUnidirectionalCyclicLinkedList& obj)
 	{
 		*list = *obj.list;
 	}
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>& DequeBasedOnBidirectionalCyclicLinkedList<T>::operator=(DequeBasedOnBidirectionalCyclicLinkedList&& obj)
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>& DequeBasedOnUnidirectionalCyclicLinkedList<T>::operator=(DequeBasedOnUnidirectionalCyclicLinkedList&& obj)
 	{
 		list = obj.list;
 		size = obj.size;
@@ -215,7 +215,7 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>& DequeBasedOnBidirectionalCyclicLinkedList<T>::operator=(std::initializer_list<T> ilist)
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>& DequeBasedOnUnidirectionalCyclicLinkedList<T>::operator=(std::initializer_list<T> ilist)
 	{
 		for (const auto& element : ilist)
 			Push(element);
@@ -223,7 +223,7 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	void DequeBasedOnBidirectionalCyclicLinkedList<T>::PushFront(const T& element)
+	void DequeBasedOnUnidirectionalCyclicLinkedList<T>::PushFront(const T& element)
 	{
 		try {
 			if (!list) {
@@ -239,7 +239,7 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	void DequeBasedOnBidirectionalCyclicLinkedList<T>::PushBack(const T& element)
+	void DequeBasedOnUnidirectionalCyclicLinkedList<T>::PushBack(const T& element)
 	{
 		try {
 			if (!list) {
@@ -254,7 +254,7 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	T DequeBasedOnBidirectionalCyclicLinkedList<T>::PopFront()
+	T DequeBasedOnUnidirectionalCyclicLinkedList<T>::PopFront()
 	{
 		try
 		{
@@ -274,7 +274,7 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	T DequeBasedOnBidirectionalCyclicLinkedList<T>::PopBack()
+	T DequeBasedOnUnidirectionalCyclicLinkedList<T>::PopBack()
 	{
 		try
 		{
@@ -290,7 +290,7 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	T DequeBasedOnBidirectionalCyclicLinkedList<T>::PeekFront()
+	T DequeBasedOnUnidirectionalCyclicLinkedList<T>::PeekFront()
 	{
 		if (list)
 			return list->Value();
@@ -298,7 +298,7 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	T DequeBasedOnBidirectionalCyclicLinkedList<T>::PeekBack()
+	T DequeBasedOnUnidirectionalCyclicLinkedList<T>::PeekBack()
 	{
 		if (list)
 			return list->Last()->Value();
@@ -309,7 +309,7 @@ export namespace DequeNamespace {
 
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>::CyclicLinkedList::CyclicLinkedList(const CyclicLinkedList& obj)
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>::CyclicLinkedList::CyclicLinkedList(const CyclicLinkedList& obj)
 	{
 		const CyclicLinkedList* iterator = obj.next;
 		CyclicLinkedList onDelete = this->next;
@@ -322,7 +322,7 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>::CyclicLinkedList::CyclicLinkedList(CyclicLinkedList&& obj)
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>::CyclicLinkedList::CyclicLinkedList(CyclicLinkedList&& obj)
 	{
 		next = obj.next;
 		data = obj.data;
@@ -330,7 +330,7 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	DequeBasedOnBidirectionalCyclicLinkedList<T>::CyclicLinkedList::CyclicLinkedList(std::initializer_list<T> ilist)
+	DequeBasedOnUnidirectionalCyclicLinkedList<T>::CyclicLinkedList::CyclicLinkedList(std::initializer_list<T> ilist)
 	{
 		CyclicLinkedList* temp = new CyclicLinkedList(T());
 		size = 1;
@@ -339,7 +339,7 @@ export namespace DequeNamespace {
 	}
 
 	template<typename T>
-	unsigned DequeBasedOnBidirectionalCyclicLinkedList<T>::CyclicLinkedList::GetSize() const
+	unsigned DequeBasedOnUnidirectionalCyclicLinkedList<T>::CyclicLinkedList::GetSize() const
 	{
 		CyclicLinkedList* iterator = this->next;
 		if (!this->next)
